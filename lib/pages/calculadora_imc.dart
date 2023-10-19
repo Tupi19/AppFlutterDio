@@ -1,4 +1,7 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/text_label.dart';
 
@@ -13,6 +16,9 @@ class _CalculadoraImcState extends State<CalculadoraImc> {
   TextEditingController nomeController = TextEditingController(text: "");
   TextEditingController pesoController = TextEditingController(text: "");
 
+  final CHAVE_ALTURA = "altura escolhida";
+  final CHAVE_NOME = "Nome escolhido";
+
   double alturaEscolhida = 0;
 
   bool salvando = false;
@@ -25,6 +31,22 @@ class _CalculadoraImcState extends State<CalculadoraImc> {
     //Peso dividido pelo quadrado da altura: 70 / 2,89 = 24,22
     double imc = peso! / (altura * altura);
     return imc;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // TODO: implement initState
+
+    carregarDados();
+  }
+
+  void carregarDados() async {
+    final storage = await SharedPreferences.getInstance();
+    setState(() {
+      nomeController.text = storage.getString(CHAVE_NOME) ?? "";
+      alturaEscolhida = storage.getDouble(CHAVE_ALTURA) ?? 0;
+    });
   }
 
   @override
@@ -48,6 +70,7 @@ class _CalculadoraImcState extends State<CalculadoraImc> {
                   ),
                   const TextLabel(texto: "Peso"),
                   TextField(
+                    keyboardType: TextInputType.number,
                     controller: pesoController,
                   ),
                   const SizedBox(
@@ -64,7 +87,7 @@ class _CalculadoraImcState extends State<CalculadoraImc> {
                         });
                       }),
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       double imc = calculaIMC();
 
                       interpretaIMC() {
@@ -82,7 +105,7 @@ class _CalculadoraImcState extends State<CalculadoraImc> {
                         } else {
                           info = "com obesidade Grau III ";
                         }
-                        ;
+
                         return info;
                       }
 
@@ -109,6 +132,12 @@ class _CalculadoraImcState extends State<CalculadoraImc> {
                         return;
                       }
 
+                      final storage = await SharedPreferences.getInstance();
+
+                      storage.setDouble(CHAVE_ALTURA, alturaEscolhida);
+                      storage.setString(CHAVE_NOME, nomeController.text);
+
+                      // ignore: use_build_context_synchronously
                       showDialog(
                           context: context,
                           builder: (BuildContext bc) => AlertDialog(
