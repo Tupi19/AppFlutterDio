@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:trilhaapp/pages/card_page.dart';
-import 'package:trilhaapp/pages/list_view_carrosel.dart';
+import 'package:trilhaapp/pages/contatos.dart';
 import 'package:trilhaapp/pages/list_view_h.dart';
+import 'package:trilhaapp/pages/consulta_cep.dart';
 import 'package:trilhaapp/widgets/custom_drawer.dart';
 
 import 'Calculadora_page.dart';
@@ -38,9 +39,11 @@ class _MainPageState extends State<MainPage> {
                 //scrollDirection: Axis.vertical, (ativar aqui para ficar vertical)
                 children: const [
                   CardPage(),
+                  ContatosPage(),
                   CalculadoraPage(),
                   ListViewHPage(),
-                  ListViewCarrosel(),
+                  //ListViewCarrosel(),
+                  ConsultaCEP(),
                 ],
               ),
             ),
@@ -56,11 +59,16 @@ class _MainPageState extends State<MainPage> {
                   BottomNavigationBarItem(
                       label: "home", icon: Icon(Icons.home)),
                   BottomNavigationBarItem(
+                      label: "Contatos", icon: Icon(Icons.contacts)),
+                  BottomNavigationBarItem(
                       label: "Calculadora", icon: Icon(Icons.calculate)),
                   BottomNavigationBarItem(
-                      label: "Mensagens", icon: Icon(Icons.navigation_rounded)),
+                      label: "Mensagens", icon: Icon(Icons.message)),
+                  /*BottomNavigationBarItem(
+                      label: "Paisagens", icon: Icon(Icons.landscape)),
+                      */
                   BottomNavigationBarItem(
-                      label: "Paisagens", icon: Icon(Icons.car_crash)),
+                      label: "BuscaCEP", icon: Icon(Icons.search_off)),
                 ]),
           ],
         ),

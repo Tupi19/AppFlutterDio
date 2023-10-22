@@ -1,4 +1,4 @@
-#Wed Oct 18 15:13:43 BRT 2023
-base.0=/Users/guilhermetupinamba/trilhaapp/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Sun Oct 22 17:56:54 BRT 2023
+base.0=/Users/guilhermetupinamba/CalculadoraAppImc/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
